@@ -20,7 +20,7 @@
             "Wxapi\\WxBizDataCrpt": "src/Wxapi/WxBizDataCrpt",
             "Wxapi\\Redpack": "src/Wxapi/Redpack",
             "Wxapi\\Wxrefund": "src/Wxapi/Wxrefund",
-            "Wxapi\\Refund": "src/Wxapi/Refund",
+            "Wxapi\\Refund": "src/Wxapi/Refund"
         }
     },
     "extra": {
