@@ -15,14 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "houzhonghua\\weixinapi\\": "*"
-        }
-    },
-    "extra": {
-        "think": {
-            "config":{
-                "wxapi": "src/config.php"
-            }            
+            "houzhonghua\\weixinapi\\": "houzhonghua/weixinapi/src"
         }
     }
 }

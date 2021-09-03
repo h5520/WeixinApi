@@ -1,16 +1,40 @@
 <?php
-use think\facade\Config;
-
+namespace houzhonghua\weixinapi;
+use houzhonghua\weixinapi\WXBizDataCrypt;
+use houzhonghua\weixinapi\Refund;
+use houzhonghua\weixinapi\WxRedpack;
 
 class Weixin
 {
+
+	protected static $config;
+
+	public function __construct(){
+
+		self::$config = [
+			// 小程序appid
+			"Applets_Appid" => "", 
+			// 小程序appsecret
+			"Applets_AppSecret" => "",
+			// 商户号
+			"Public_mchid" => "",
+			// 公众号appid
+			"Public_Appid" => "",
+			// 微信商户 key
+			"Public_key" => "",
+			// 微信退款证书
+			'apiclient_cert' => dirname(__FILE__)."\\cert\\apiclient_cert.pem", 
+	        'apiclient_key' => dirname(__FILE__)."\\cert\\apiclient_key.pem"
+		];
+
+	}
 
 	/**
      * notify_url接收页面
      */
     public function notify(){
         // 导入微信支付sdk
-        $wxpay = new WeixinPay;
+        $wxpay = new weixinapi;
         $result = $wxpay->notify();
         
         return $result;
@@ -24,20 +48,28 @@ class Weixin
      *		['Drug' => '预约开药']
      *		['productlist' => '商超订单']
      */
-    public function pay($out_trade_no,$openid,$price,$notify,$attach){
+    public function pay($data = []){
 
-		$appid        = Config::get('Applets_Appid'); // appid
-		$openid       = $openid; //openid
-		$mch_id       = Config::get('Public_mchid'); // 商户号
-		$key          = Config::get('Public_key'); // key
-		$out_trade_no = $out_trade_no; //订单号
-		$total_fee    = floatval($price * 100); // 金额
-		$body         = $notify;
-		$attach		  = $attach;
+		$appid        = self::$config['Applets_Appid'];
+		$mch_id       = self::$config['Public_mchid'];
+		$key          = self::$config['Public_key'];
+
+		// openid
+		$openid       = $data['openid'];
+		// 订单号
+		$out_trade_no = $data['out_trade_no'];
+		// 金额
+		$total_fee    = floatval($data['price'] * 100);
+		// 显示文字
+		$body         = $data['notify'];
+		// 额外参数
+		$attach		  = $data['attach'];
+		// 回调地址
+		$notify_url		  = $data['notify_url'];
 		
-		$weixinpay = new WeixinPay($appid,$openid,$mch_id,$key,$out_trade_no,$body,$total_fee,$attach);
+		$weixinapi = new WeixinPay($appid,$openid,$mch_id,$key,$out_trade_no,$body,$total_fee,$attach,$notify_url);
 
-		$return = $weixinpay->pay();
+		$return = $weixinapi->pay();
 
 		return $return;
     }
@@ -45,9 +77,9 @@ class Weixin
 	/*
 	 * 获取 openid
 	*/
-	public function OpenID($code){
-		$APPID = Config::get('Applets_Appid');
-		$AppSecret = Config::get('Applets_AppSecret');
+	public function OpenID($code = ""){
+		$APPID = self::$config['Applets_Appid'];
+		$AppSecret = self::$config['Applets_AppSecret'];
 
 		$url="https://api.weixin.qq.com/sns/jscode2session?appid=".$APPID."&secret=".$AppSecret."&js_code=".$code."&grant_type=authorization_code";
 
@@ -59,9 +91,9 @@ class Weixin
 	/*
 	 * 获取用户手机号
 	*/
-	public function getMobile($sessionKey,$encryptedData,$iv){
+	public function getMobile($sessionKey = '',$encryptedData = '',$iv = ''){
 
-        $appid = Config::get('Applets_Appid');
+        $appid = self::$config['Applets_Appid'];
         $sessionKey = $sessionKey;
         $encryptedData= str_replace(" ", "+", $encryptedData);
         $iv = $iv;
@@ -75,6 +107,46 @@ class Weixin
         }else{
         	return json_encode($arr);
         }
+	}
+
+	/*
+	 * 微信退款
+	*/
+	public function refund($out_trade_no = '',$transaction_id = '',$total_fee = '',$refund_fee = ''){
+
+		$par = [
+	        'out_trade_no' => $out_trade_no, // 用户自己生成的订单号
+	        'transaction_id' => $transaction_id, // 微信订单号
+	        'total_fee' => $total_fee, // 实际支付金额
+	        'refund_fee' => $refund_fee // 实际退款金额
+	    ];
+
+	    $obj = new Refund();
+	    $refundRes = $obj->wxrefundapi($par,self::$config);
+	}
+
+	/*
+	 * 微信提现
+	*/
+	public function Cashout($price = '',$openid = '',$out_trade_no = '',$act_name = ''){
+
+	    $config = array(
+	        'wxappid'        => self::$config['Public_Appid'],//微信appid
+	        'mch_id'         => self::$config['Public_mchid'],//商户号
+	        'pay_apikey'     => self::$config['Public_key'],
+	        'api_cert'       => self::$config['apiclient_cert'],
+	        'api_key'        => self::$config['apiclient_key']
+	    );
+
+	    $redpack = new WxRedpack(self::$config); //初始化类(同时传递参数)
+       	$openid = $openid;
+       	$money = $price;//提现1
+       	$trade_no = $out_trade_no;//商户订单号
+       	$act_name = $act_name;
+	    //$redpack->sendredpack($openid,$money,$trade_no,$act_name); //发红包
+	    $result = $redpack->mchpay($openid,$money,$trade_no,$act_name);            //企业付款
+	    
+	    return $result;
 	}
 
 	public function vget($url){
