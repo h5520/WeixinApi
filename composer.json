@@ -1,0 +1,33 @@
+{
+    "name": "hou/weixinpackages",
+    "description": "WeixinAPI",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "houzhonghua",
+            "email": "killerweb@sina.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "ThinkPHP": ">=5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wxapi\\WeixinPay": "src/Wxapi/WeixinPay",
+            "Wxapi\\WxBizDataCrpt": "src/Wxapi/WxBizDataCrpt",
+            "Wxapi\\Redpack": "src/Wxapi/Redpack",
+            "Wxapi\\Wxrefund": "src/Wxapi/Wxrefund",
+            "Wxapi\\Refund": "src/Wxapi/Refund",
+        }
+    },
+    "extra": {
+        "think": {
+            "config":{
+                "captcha": "src/config.php"
+            }            
+        }
+    }
+}
