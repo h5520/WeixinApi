@@ -15,10 +15,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Wxapi\\WeixinPay": "src/Wxapi/WeixinPay",
-            "Wxapi\\WXBizDataCrypt": "src/Wxapi/WXBizDataCrypt",
-            "Wxapi\\WxRedpack": "src/Wxapi/WxRedpack",
-            "Wxapi\\WXRefund": "src/Wxapi/WXRefund"
+            "Wxapi\\WeixinPay": "src/Wxapi/WeixinPay/",
+            "Wxapi\\WXBizDataCrypt": "src/Wxapi/WXBizDataCrypt/",
+            "Wxapi\\WxRedpack": "src/Wxapi/WxRedpack/",
+            "Wxapi\\WXRefund": "src/Wxapi/WXRefund/"
         }
     },
     "extra": {
