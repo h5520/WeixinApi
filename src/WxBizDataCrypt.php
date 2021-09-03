@@ -21,7 +21,7 @@ class WXBizDataCrypt
 			'41016' => 'base64解密失败'
 		];
 
-		return ['code' => $code,'msg' => $msg[$code]];
+		return ['code' => (int)$code,'msg' => $msg[$code]];
 	}
 
     private $appid;
