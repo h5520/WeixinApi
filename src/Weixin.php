@@ -98,9 +98,13 @@ class Weixin
         $encryptedData= str_replace(" ", "+", $encryptedData);
         $iv = $iv;
         $pc = new WXBizDataCrypt($appid, $sessionKey);
-        $res = $pc->decryptData($encryptedData,$iv);
-
-        return $res;
+        $errCode = $pc->decryptData($encryptedData,$iv,$data);
+        $str = stripslashes($data); 
+		$arr = json_decode($str,true);
+        if($errCode['code'] != 200){
+        	return json($errCode);
+        }
+        return json($arr);
 	}
 
 	/*

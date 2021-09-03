@@ -12,7 +12,7 @@ class WXBizDataCrypt
 	public static function ErrorCode($code){
 
 		$msg = [
-			'0'		 => 'OK',
+			'200'	=> 'ok',
 			'41001' => 'encodingAesKey 非法',
 			'41002' => 'iv 非法',
 			'41003' => 'aes 解密失败',
@@ -21,7 +21,7 @@ class WXBizDataCrypt
 			'41016' => 'base64解密失败'
 		];
 
-		return json(['code' => $code,'msg' => $msg[$code]])->Send();
+		return ['code' => $code,'msg' => $msg[$code]];
 	}
 
     private $appid;
@@ -47,7 +47,7 @@ class WXBizDataCrypt
      *
 	 * @return int 成功0，失败返回对应的错误码
 	 */
-	public function decryptData( $encryptedData, $iv)
+	public function decryptData( $encryptedData, $iv, &$data)
 	{
 		if (strlen($this->sessionKey) != 24) {
 			return self::ErrorCode('41001');
@@ -75,7 +75,8 @@ class WXBizDataCrypt
 			return self::ErrorCode('41003');
 		}
 
-		return $result;
+		$data = $result;
+		return self::ErrorCode('200');
 	}
 
 }
