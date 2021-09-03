@@ -47,7 +47,7 @@ class WXBizDataCrypt
      *
 	 * @return int 成功0，失败返回对应的错误码
 	 */
-	public function decryptData( $encryptedData, $iv, &$data )
+	public function decryptData( $encryptedData, $iv)
 	{
 		if (strlen($this->sessionKey) != 24) {
 			return self::ErrorCode('41001');
@@ -64,8 +64,9 @@ class WXBizDataCrypt
 
 		$result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
 
-		$dataObj=json_decode( $result );
-		if( $dataObj  == NULL )
+		$dataObj=json_decode($result);
+
+		if($dataObj  == NULL)
 		{
 			return self::ErrorCode('41003');
 		}
@@ -73,8 +74,8 @@ class WXBizDataCrypt
 		{
 			return self::ErrorCode('41003');
 		}
-		$data = $result;
-		return self::ErrorCode('0');
+
+		return $result;
 	}
 
 }
