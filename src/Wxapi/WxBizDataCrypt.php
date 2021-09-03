@@ -1,5 +1,5 @@
 <?php
-namespace Wxapi\WxBizDataCrypt;
+namespace Wxapi\WXBizDataCrypt;
 /**
  * 对微信小程序用户加密数据的解密示例代码.
  *
