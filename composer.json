@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "houzhonghua\\weixinapi\\": "houzhonghua/weixinapi/src"
+            "houzhonghua\\weixinapi\\": "src/"
         }
     }
 }
