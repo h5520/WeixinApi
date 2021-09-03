@@ -1,5 +1,5 @@
 <?php
-namespace Wxapi\WXRefund;
+namespace houzhonghua\weixinpay;
 /**
  * 微信退款
  * @author    zzy

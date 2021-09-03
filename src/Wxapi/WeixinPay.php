@@ -1,5 +1,5 @@
 ﻿<?php
-namespace Wxapi\WeixinPay;
+namespace houzhonghua\weixinpay;
 /*
  * 小程序微信支付
  */

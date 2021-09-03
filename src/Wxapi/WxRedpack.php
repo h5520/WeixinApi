@@ -1,5 +1,5 @@
 <?php
-namespace Wxapi\WxRedpack;
+namespace houzhonghua\weixinpay;
 /**
  * @Author: 小尤
  * @Date:   2017-08-30
