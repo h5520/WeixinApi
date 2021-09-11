@@ -30,17 +30,6 @@ class Weixin
 		self::$config = array_merge(self::$config,$config);
 	}
 
-	/**
-     * notify_url接收页面
-     */
-    public function notify(){
-        // 导入微信支付sdk
-        $wxpay = new weixinapi;
-        $result = $wxpay->notify();
-        
-        return $result;
-    }
-
     /**
      * 公众号支付
      * @ $notify:

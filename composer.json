@@ -11,7 +11,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "houzhonghua/curl": "dev-main"
     },
     "autoload": {
         "psr-4": {
