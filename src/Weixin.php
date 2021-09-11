@@ -9,11 +9,11 @@ class Weixin
 
 	protected static $config;
 
-	public function __construct(){
+	public function __construct($config = []){
 
 		self::$config = [
 			// 小程序appid
-			"Applets_Appid" => "", 
+			"Applets_Appid" => "",
 			// 小程序appsecret
 			"Applets_AppSecret" => "",
 			// 商户号
@@ -27,6 +27,7 @@ class Weixin
 	        'apiclient_key' => dirname(__FILE__)."\\cert\\apiclient_key.pem"
 		];
 
+		self::$config = array_merge(self::$config,$config);
 	}
 
 	/**

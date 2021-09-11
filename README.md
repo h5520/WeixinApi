@@ -10,6 +10,35 @@ composer require houzhonghua/weixinapi dev-main
 use houzhonghua\weixinapi\Weixin;
 ```
 
+## 自定义配置文件
+```php
+
+$config = [
+    // 小程序appid
+    "Applets_Appid" => "1",
+    // 小程序appsecret
+    "Applets_AppSecret" => "2",
+    // 商户号
+    "Public_mchid" => "3",
+    // 公众号appid
+    "Public_Appid" => "",
+    // 微信商户 key
+    "Public_key" => "",
+    // 微信退款证书
+    'apiclient_cert' => dirname(__FILE__)."\\cert\\apiclient_cert.pem", 
+    'apiclient_key' => dirname(__FILE__)."\\cert\\apiclient_key.pem"
+];
+
+$query = new Weixin($config);
+
+```
+>或者
+```php
+// 在 config 目录下创建一个 weixin.php 的配置文件
+// 把上面的配置信息复制进去，然后用下面的方法调取
+$query = new Weixin(Config.get('wexin'));
+
+```
 ## 获取 OpenID
 ```php
 $query = new Weixin;
