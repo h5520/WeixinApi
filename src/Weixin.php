@@ -92,9 +92,9 @@ class Weixin
         $str = stripslashes($data); 
 		$arr = json_decode($str,true);
         if($errCode['code'] != 200){
-        	return json($errCode);
+        	return $errCode;
         }
-        return json($arr);
+        return $arr;
 	}
 
 	/*
