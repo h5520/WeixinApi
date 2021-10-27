@@ -1,8 +1,8 @@
 <?php
-namespace houzhonghua\weixinapi;
-use houzhonghua\weixinapi\WXBizDataCrypt;
-use houzhonghua\weixinapi\Refund;
-use houzhonghua\weixinapi\WxRedpack;
+namespace houzhonghua\weixin;
+use houzhonghua\weixin\api\WXBizDataCrypt;
+use houzhonghua\weixin\api\Refund;
+use houzhonghua\weixin\api\WxRedpack;
 
 class Weixin
 {

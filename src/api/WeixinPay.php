@@ -1,5 +1,5 @@
 <?php
-namespace houzhonghua\weixinapi;
+namespace houzhonghua\weixin\api;
 /*
  * 小程序微信支付
  */

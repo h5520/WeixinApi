@@ -1,5 +1,5 @@
 <?php
-namespace houzhonghua\weixinapi;
+namespace houzhonghua\weixin\api;
 /**
  * 对微信小程序用户加密数据的解密示例代码.
  *

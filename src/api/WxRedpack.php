@@ -1,5 +1,5 @@
 <?php
-namespace houzhonghua\weixinapi;
+namespace houzhonghua\weixin\api;
 /**
  * @Author: 小尤
  * @Date:   2017-08-30
