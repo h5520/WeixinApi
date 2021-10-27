@@ -1,13 +1,13 @@
 # 使用方式
 
 ```bash
-composer require houzhonghua/weixinapi dev-main
+composer require houzhonghua/weixin dev-main
 ```
 
 ## 引入
 
 ```php
-use houzhonghua\weixinapi\Weixin;
+use houzhonghua\weixin\Weixin;
 ```
 
 ## 自定义配置文件
