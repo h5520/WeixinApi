@@ -1,6 +1,6 @@
 {
     "name": "houzhonghua/weixin",
-    "description": "WeixinAPI",
+    "description": "小程序 APP 微信支付、微信登录、微信回调、微信退款、微信提现",
     "type": "library",
     "license": "MIT",
     "authors": [
